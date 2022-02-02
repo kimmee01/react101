@@ -6,14 +6,21 @@ import styled from "styled-components";
 interface IHeader { 
     url? : string;
     pageName? : string;
+    isShowIconBack : boolean;
 }
 
 const  Header = (props : IHeader) => { 
     return (
-        <Styled>
-            <Link href={props.url || "/"}>
-                   <i className="fas fa-angle-left"></i>
-            </Link>
+        <Styled
+        isShowIconBack ={props.isShowIconBack}
+        >
+            {
+                props.isShowIconBack &&
+                (<Link href={props.url || "/"}>
+                        <i className="fas fa-angle-left"></i>
+                </Link>)
+            }
+          
             {
                 props.pageName && (
                     <h2 className="page-name">{props.pageName}</h2>
@@ -23,21 +30,27 @@ const  Header = (props : IHeader) => {
         </Styled>
     ) 
 }
+Header.defaultProps = {
+    isShowIconBack: false
+};
+
 Header.propTypes = {
     url : PropTypes.string,
-    pageName : PropTypes.string
+    pageName : PropTypes.string,
+    isShowIconBack : PropTypes.bool,
 };
+
 
 
 export default Header ;
 
-const Styled = styled.nav`
+const Styled = styled.nav<any>`
     display: inline-flex; 
     align-items:  center;
     padding : 20px 30px;
     width: 100%;
     .page-name{
-        margin-left: 20px;
+        margin-left: ${props => !props.isShowIconBack ? "0px" : "20px"} ;
     }
     i {
         font-size:30px;
