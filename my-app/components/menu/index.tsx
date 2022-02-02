@@ -29,9 +29,9 @@ const Menu = (props: IHeader) => {
                         </div>
                     </div>
                 <ul>
-                    {config.menu.map((o: any) =>
-                       <Link href={o.url}>
-                            <li onClick={() => setIsShowMenu(!isShowMenu)}>
+                    {config.menu.map((o: any , key : number) =>
+                       <Link href={o.url}  key={key}>
+                            <li onClick={() => setIsShowMenu(!isShowMenu)} key={key}>
                                 <p>{o.name}</p>
                             </li>
                         </Link>
